@@ -12,27 +12,14 @@ export default function About() {
   );
 }
 
-// export async function getStaticProps(contex: { locale: any }) {
-//   const { locale } = contex;
-//   return {
-//     props: {
-//       ...(await serverSideTranslations(locale, ["common", "about"])),
-//     },
-//   };
-// }
-
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const translationsProps = await serverSideTranslations(locale ?? "en", [
-    // `i18next` namespace, matches translations file names
-    // & `defaultNS` in `next-i18next.config.js`
     "common",
     "about",
   ]);
 
   return {
     props: {
-      // These props are used by `appWithTranslation` in `_app.tsx`
-      // to set up a React context which holds translations
       ...translationsProps,
     },
   };
